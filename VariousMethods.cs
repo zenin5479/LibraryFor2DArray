@@ -54,7 +54,6 @@ namespace LibraryFor2DArray
          else
          {
             Console.WriteLine("Исходный массив строк");
-            Console.BackgroundColor = ConsoleColor.DarkBlue;
             int indexLines = 0;
             while (indexLines < allLines.Length)
             {
