@@ -93,8 +93,6 @@ namespace LibraryFor2DArray
                countSymbol = 0;
             }
 
-            Console.ResetColor();
-
             // Разделение строки на подстроки по пробелу и конвертация подстрок в double
             Console.WriteLine("Двухмерный числовой массив");
             StringBuilder stringModified = new StringBuilder();
@@ -142,7 +140,6 @@ namespace LibraryFor2DArray
                column = 0;
                row++;
             }
-            Console.ResetColor();
          }
 
          return arrayDouble;
