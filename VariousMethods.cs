@@ -207,7 +207,6 @@ namespace LibraryFor2DArray
          // Объединение одномерного массива максимальных значений строк double[]
          // в одномерный массив строк string[] для записи в файл (в одну строку массива)
          Console.WriteLine("Одномерный массив строк");
-         Console.BackgroundColor = ConsoleColor.DarkBlue;
          StringBuilder stringModified = new StringBuilder();
          int row = 0;
          while (row < inputArray.GetLength(0))
@@ -225,7 +224,6 @@ namespace LibraryFor2DArray
          }
 
          Console.WriteLine(stringModified);
-         Console.ResetColor();
          string[] stringArray = { stringModified.ToString() };
          return stringArray;
       }
