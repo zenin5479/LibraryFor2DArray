@@ -38,8 +38,8 @@ namespace LibraryFor2DArray
          } while (m <= 0 || m > 20);
 
          return m;
-      } 
-      
+      }
+
       public static double[,] InputArray(double[,] inputArray, int n, int m)
       {
          Console.WriteLine("Двумерный числовой массив для проведения поиска");
@@ -59,7 +59,7 @@ namespace LibraryFor2DArray
          return outputArray;
       }
 
-       public static double[,] VvodArray(int n, int m)
+      public static double[,] VvodArray(int n, int m)
       {
          string filePath = AppContext.BaseDirectory + "a.txt";
          // Двумерный массив вещественных чисел
@@ -164,247 +164,6 @@ namespace LibraryFor2DArray
 
          return arrayDouble;
       }
-      
-      
-      
-      public static double[] FindMax(double[,] inputArray)
-      {
-         // Поиск максимального элемента строки (без флагов bool)
-         double[] arrayMax = new double[inputArray.GetLength(0)];
-         int rowOut = 0;
-         int columnOut = 0;
-         while (rowOut < inputArray.GetLength(0))
-         {
-            // Cчитаем, что максимум - это первый элемент строки
-            double maxOut = inputArray[rowOut, 0];
-            while (columnOut < inputArray.GetLength(1))
-            {
-               if (maxOut < inputArray[rowOut, columnOut])
-               {
-                  maxOut = inputArray[rowOut, columnOut];
-               }
-
-               columnOut++;
-            }
-
-            arrayMax[rowOut] = maxOut;
-            //Console.WriteLine("Максимум в строке {0} равен: {1}", rowOut, maxOut);
-            columnOut = 0;
-            rowOut++;
-         }
-
-         Console.WriteLine("Массив максимальных значений строк");
-         int indexMax = 0;
-         while (indexMax < arrayMax.Length)
-         {
-            Console.Write("{0} ", arrayMax[indexMax]);
-            indexMax++;
-         }
-
-         Console.WriteLine();
-         return arrayMax;
-      }
-
-      public static string[] VivodStringArray(double[] inputArray)
-      {
-         // Объединение одномерного массива максимальных значений строк double[]
-         // в одномерный массив строк string[] для записи в файл (в одну строку массива)
-         Console.WriteLine("Одномерный массив строк");
-         StringBuilder stringModified = new StringBuilder();
-         int row = 0;
-         while (row < inputArray.GetLength(0))
-         {
-            if (row != inputArray.GetLength(0) - 1)
-            {
-               stringModified.Append(inputArray[row] + " ");
-            }
-            else
-            {
-               stringModified.Append(inputArray[row]);
-            }
-
-            row++;
-         }
-
-         Console.WriteLine(stringModified);
-         string[] stringArray = { stringModified.ToString() };
-         return stringArray;
-      }
-
-      public static void FileWriteString(string[] stringArray)
-      {
-         // Запись массива строк в файл
-         Console.WriteLine("Запись массива строк в файл");
-         string filePath = AppContext.BaseDirectory + "b.txt";
-         File.WriteAllLines(filePath, stringArray);
-      }
-
-      public static string[] VivodArrayString(double[] inputArray)
-      {
-         // Объединение одномерного массива максимальных значений строк double[]
-         // в одномерный массив строк string[] для записи в файл
-         Console.WriteLine("Одномерный массив строк");
-         StringBuilder stringModified = new StringBuilder();
-         string[] arrayString = new string[inputArray.GetLength(0)];
-         int row = 0;
-         while (row < inputArray.GetLength(0))
-         {
-            stringModified.Append(inputArray[row]);
-            string subLine = stringModified.ToString();
-            arrayString[row] = subLine;
-            Console.WriteLine(subLine);
-            stringModified.Clear();
-            row++;
-         }
-
-         return arrayString;
-      }
-
-      public static void FileWriteArray(string[] arrayString)
-      {
-         // Запись массива строк в файл
-         Console.WriteLine("Запись массива строк в файл");
-         string filePath = AppContext.BaseDirectory + "c.txt";
-         File.WriteAllLines(filePath, arrayString);
-      }
-
-
-
-
-     // Обновлен метод +
-      public static int SearchingNull(double[] inputArray, string nameArray)
-      {
-         double numbercomparison = 0;
-         int count = 0;
-         int i = 0;
-         while (i < inputArray.Length)
-         {
-            // Сравниваем значения double используя метод CompareTo(Double) 
-            if (inputArray[i].CompareTo(numbercomparison) == 0)
-            {
-               count++;
-            }
-
-            // Сравниваем значения double используя метод Equals(Double)
-            //if (inputArray[i].Equals(numbercomparison))
-            //{
-            //   count++;
-            //}
-
-            // Сравниваем значения double используя оператор равенства ==
-            //if (inputArray[i] == 0)
-            //{
-            //   count++;
-            //}
-
-            i++;
-         }
-
-         if (count != 0)
-         {
-            Console.WriteLine("В массиве {0} элементов равных нулю: {1}", nameArray, count);
-         }
-         else
-         {
-            Console.WriteLine("В массиве {0} нет элементов равных нулю", nameArray);
-         }
-
-         return count;
-      }
-
-      public static void ComparisonNull(int a, int b, int c)
-      {
-         string[] name = { "A", "B", "C" };
-         int[] arr = { a, b, c };
-         // Поиск минимального элемента строки (без флагов bool)
-         int min = arr[0];
-         int counter = 0;
-         while (counter < arr.Length)
-         {
-            // Cчитаем, что минимум - это первый элемент строки
-            if (arr[counter] < min)
-            {
-               min = arr[counter];
-            }
-
-            counter++;
-         }
-         Console.WriteLine("Минимум  равен: {0}", min);
-
-         // Проверка массивов на минимум элементов
-         counter = 0;
-         while (counter < arr.Length)
-         {
-            // Cчитаем, что минимум - это первый элемент строки
-            if (arr[counter] == min)
-            {
-               Console.WriteLine("В массиве {0} минимальное количество элементов равных нулю: {1}", name[counter], min);
-            }
-
-            counter++;
-         }
-      }
-
-      // Обновлен метод + 
-      public static void ComparisonNegative(int a, int b, int c)
-      {
-         string[] name = { "A", "B", "C" };
-         int[] arr = { a, b, c };
-         // Поиск минимального элемента строки (без флагов bool)
-         int min = arr[0];
-         int counter = 0;
-         while (counter < arr.Length)
-         {
-            // Cчитаем, что минимум - это первый элемент строки
-            if (arr[counter] < min)
-            {
-               min = arr[counter];
-            }
-
-            counter++;
-         }
-         Console.WriteLine("Наименьшее количество отрицательных элементов в массивах {0}, {1}, {2} равно: {3}", name[0], name[1], name[2], min);
-
-         // Проверка массивов на минимум элементов
-         counter = 0;
-         while (counter < arr.Length)
-         {
-            // Cчитаем, что минимум - это первый элемент строки
-            if (arr[counter] == min)
-            {
-               Console.WriteLine("В массиве {0} наименьшее количество отрицательных элементов", name[counter]);
-            }
-
-            counter++;
-         }
-      }
-
-      public static int SearchingNegative(double[] inputArray, string nameArray)
-      {
-         int count = 0;
-         int i = 0;
-         while (i < inputArray.Length)
-         {
-            if (inputArray[i] < 0)
-            {
-               count++;
-            }
-
-            i++;
-         }
-
-         Console.WriteLine("В массиве {0} отрицательных элементов: {1}", nameArray, count);
-         if (count == 0)
-         {
-            Console.WriteLine("В массиве {0} нет отрицательных элементов", nameArray);
-         }
-
-         return count;
-      }
-
-     
-
-     
 
       public static double[] FindMax(double[,] inputArray)
       {
@@ -478,7 +237,7 @@ namespace LibraryFor2DArray
          string filePath = AppContext.BaseDirectory + "b.txt";
          File.WriteAllLines(filePath, stringArray);
       }
-
+      
       // Обновлен метод + 
       public static string[] VivodArrayString(double[] inputArray)
       {
@@ -501,6 +260,7 @@ namespace LibraryFor2DArray
          return arrayString;
       }
 
+     
       public static void FileWriteArray(string[] arrayString)
       {
          // Запись массива строк в файл
