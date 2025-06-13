@@ -260,7 +260,6 @@ namespace LibraryFor2DArray
          return arrayString;
       }
 
-     
       public static void FileWriteArray(string[] arrayString)
       {
          // Запись массива строк в файл
