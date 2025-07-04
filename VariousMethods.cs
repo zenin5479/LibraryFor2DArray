@@ -489,10 +489,6 @@ namespace LibraryFor2DArray
 
 
 
-
-
-
-
       public static void FileWriteString(string[] stringArray)
       {
          // Запись массива строк в файл
