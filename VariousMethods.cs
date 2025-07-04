@@ -428,24 +428,6 @@ namespace LibraryFor2DArray
          return stringArray;
       }
 
-
-
-      public static void FileWriteString(string[] stringArray, string nameFile)
-      {
-         // Запись массива строк в файл
-         Console.WriteLine("Запись массива строк в файл {0}", nameFile);
-         string filePath = AppContext.BaseDirectory + nameFile;
-         File.WriteAllLines(filePath, stringArray);
-      }
-
-
-
-
-
-
-
-
-
       public static string[] VivodStringArray(double[] inputArray)
       {
          // Объединение одномерного массива максимальных значений строк double[]
@@ -472,14 +454,6 @@ namespace LibraryFor2DArray
          return stringArray;
       }
 
-      public static void FileWriteString(string[] stringArray)
-      {
-         // Запись массива строк в файл
-         Console.WriteLine("Запись массива строк в файл");
-         string filePath = AppContext.BaseDirectory + "b.txt";
-         File.WriteAllLines(filePath, stringArray);
-      }
-
       public static string[] VivodArrayString(double[] inputArray)
       {
          // Объединение одномерного массива максимальных значений строк double[]
@@ -500,6 +474,34 @@ namespace LibraryFor2DArray
 
          return arrayString;
       }
+
+      public static void FileWriteString(string[] stringArray, string nameFile)
+      {
+         // Запись массива строк в файл
+         Console.WriteLine("Запись массива строк в файл {0}", nameFile);
+         string filePath = AppContext.BaseDirectory + nameFile;
+         File.WriteAllLines(filePath, stringArray);
+      }
+
+
+
+
+
+
+
+
+
+
+
+      public static void FileWriteString(string[] stringArray)
+      {
+         // Запись массива строк в файл
+         Console.WriteLine("Запись массива строк в файл");
+         string filePath = AppContext.BaseDirectory + "b.txt";
+         File.WriteAllLines(filePath, stringArray);
+      }
+
+
 
       public static void FileWriteArray(string[] arrayString)
       {
