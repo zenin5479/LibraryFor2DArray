@@ -491,10 +491,6 @@ namespace LibraryFor2DArray
          File.WriteAllLines(filePath, stringArray);
       }
 
-
-
-
-
       public static void FileWriteArray(string[] arrayString)
       {
          // Запись массива строк в файл
