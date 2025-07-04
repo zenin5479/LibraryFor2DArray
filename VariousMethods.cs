@@ -475,6 +475,14 @@ namespace LibraryFor2DArray
          return arrayString;
       }
 
+      public static void FileWriteString(string[] stringArray)
+      {
+         // Запись массива строк в файл
+         Console.WriteLine("Запись массива строк в файл");
+         string filePath = AppContext.BaseDirectory + "b.txt";
+         File.WriteAllLines(filePath, stringArray);
+      }
+
       public static void FileWriteString(string[] stringArray, string nameFile)
       {
          // Запись массива строк в файл
@@ -483,13 +491,7 @@ namespace LibraryFor2DArray
          File.WriteAllLines(filePath, stringArray);
       }
 
-      public static void FileWriteString(string[] stringArray)
-      {
-         // Запись массива строк в файл
-         Console.WriteLine("Запись массива строк в файл");
-         string filePath = AppContext.BaseDirectory + "b.txt";
-         File.WriteAllLines(filePath, stringArray);
-      }
+
 
 
 
