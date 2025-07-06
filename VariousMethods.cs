@@ -666,6 +666,7 @@ namespace LibraryFor2DArray
 
       public static void SplittingLines(int[,] input, int multiple, string nameFile)
       {
+         int counterMultiple = 0;
          int[] lines = new int[input.GetLength(1)];
          int i = 0;
          while (i < input.GetLength(0))
@@ -679,13 +680,21 @@ namespace LibraryFor2DArray
 
             if (SearchingMultiple(lines, multiple))
             {
-               string line = "В массиве найдена строка " + (i + 1) + " с элементом, кратным " + multiple;
-               Console.WriteLine(line);
-               FileAppendStringArray(line, nameFile);
+               string lineFound = "В массиве найдена строка " + (i + 1) + " с элементом, кратным " + multiple;
+               Console.WriteLine(lineFound);
+               FileAppendStringArray(lineFound, nameFile);
+               counterMultiple++;
             }
 
             Array.Clear(lines, 0, lines.Length);
             i++;
+         }
+
+         if (counterMultiple == 0)
+         {
+            string lineNotFound = "В массиве не найдено строк с элементом, кратным " + multiple;
+            Console.WriteLine(lineNotFound);
+            FileAppendStringArray(lineNotFound, nameFile);
          }
       }
 
