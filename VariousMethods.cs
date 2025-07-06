@@ -11,7 +11,7 @@ namespace LibraryFor2DArray
          int n;
          do
          {
-            Console.WriteLine("Введите количество строк массива А");
+            Console.WriteLine("Введите количество строк массива:");
             int.TryParse(Console.ReadLine(), out n);
             //n = Convert.ToInt32(Console.ReadLine());
             if (n <= 0 || n > 20)
@@ -28,7 +28,7 @@ namespace LibraryFor2DArray
          int m;
          do
          {
-            Console.WriteLine("Введите количество столбцов массива А");
+            Console.WriteLine("Введите количество столбцов массива:");
             int.TryParse(Console.ReadLine(), out m);
             //m = Convert.ToInt32(Console.ReadLine());
             if (m <= 0 || m > 20)
@@ -38,6 +38,23 @@ namespace LibraryFor2DArray
          } while (m <= 0 || m > 20);
 
          return m;
+      }
+
+      public static int MultipleElement()
+      {
+         int multiple;
+         do
+         {
+            Console.WriteLine("Введите величину:");
+            int.TryParse(Console.ReadLine(), out multiple);
+            //multiple = Convert.ToInt32(Console.ReadLine());
+            if (multiple <= 0 || multiple > 99)
+            {
+               Console.WriteLine("Введено не верное значение");
+            }
+         } while (multiple <= 0 || multiple > 99);
+
+         return multiple;
       }
 
       public static int SizeRow(string nameArray)
@@ -74,7 +91,7 @@ namespace LibraryFor2DArray
          return m;
       }
 
-      public static double[,] VvodArray(int n, int m)
+      public static double[,] EnterArrayDouble(int n, int m)
       {
          string filePath = AppContext.BaseDirectory + "a.txt";
          // Двумерный массив вещественных чисел
@@ -180,7 +197,7 @@ namespace LibraryFor2DArray
          return arrayDouble;
       }
 
-      public static double[,] VvodArray(string path, string nameFile)
+      public static double[,] EnterArrayDouble(string path, string nameFile)
       {
          // Двумерный массив вещественных чисел
          double[,] arrayDouble = { };
@@ -278,7 +295,105 @@ namespace LibraryFor2DArray
          return arrayDouble;
       }
 
-      public static double[,] InputArray(double[,] inputArray, int n, int m)
+      public static int[,] EnterArrayInt(string path, string nameFile)
+      {
+         // Двумерный целочисленный массив 
+         int[,] arrayDouble = { };
+         // Чтение файла за одну операцию
+         string[] allLines = File.ReadAllLines(path);
+         if (allLines == null || allLines.Length == 0)
+         {
+            Console.WriteLine("Ошибка содержимого файла для чтения {0}", nameFile);
+            //Console.WriteLine("Ошибка содержимого файла для чтения {0}. Файл пуст", nameFile);
+         }
+         else
+         {
+            int indexLines = 0;
+            while (indexLines < allLines.Length)
+            {
+               allLines[indexLines] = allLines[indexLines];
+               indexLines++;
+            }
+
+            // Разделение строки на подстроки по пробелу для определения количества столбцов в строке
+            int[] sizeArray = new int[allLines.Length];
+            char symbolSpace = ' ';
+            int countRow = 0;
+            int countSymbol = 0;
+            int countСolumn = 0;
+            while (countRow < allLines.Length)
+            {
+               string line = allLines[countRow];
+               while (countSymbol < line.Length)
+               {
+                  if (symbolSpace == line[countSymbol])
+                  {
+                     countСolumn++;
+                  }
+
+                  if (countSymbol == line.Length - 1)
+                  {
+                     countСolumn++;
+                  }
+
+                  countSymbol++;
+               }
+
+               sizeArray[countRow] = countСolumn;
+               countСolumn = 0;
+               countRow++;
+               countSymbol = 0;
+            }
+
+            // Разделение строки на подстроки по пробелу и конвертация подстрок в int
+            StringBuilder stringModified = new StringBuilder();
+            arrayDouble = new int[allLines.Length, sizeArray.Length];
+            char spaceCharacter = ' ';
+            int row = 0;
+            int column = 0;
+            int countCharacter = 0;
+            while (row < arrayDouble.GetLength(0))
+            {
+               string line = allLines[row];
+               while (column < sizeArray[row])
+               {
+                  while (countCharacter < line.Length)
+                  {
+                     if (spaceCharacter != line[countCharacter])
+                     {
+                        stringModified.Append(line[countCharacter]);
+                     }
+                     else
+                     {
+                        string subLine = stringModified.ToString();
+                        arrayDouble[row, column] = Convert.ToInt32(subLine);
+                        stringModified.Clear();
+                        column++;
+                     }
+
+                     if (countCharacter == line.Length - 1)
+                     {
+                        string subLine = stringModified.ToString();
+                        arrayDouble[row, column] = Convert.ToInt32(subLine);
+                        stringModified.Clear();
+                        column++;
+                     }
+
+                     countCharacter++;
+                  }
+
+                  countCharacter = 0;
+               }
+
+               column = 0;
+               row++;
+            }
+         }
+
+         return arrayDouble;
+      }
+
+      public static double[,] InputArrayDouble(double[,] inputArray, int n, int m)
       {
          Console.WriteLine("Двумерный числовой массив для проведения поиска");
          double[,] outputArray = new double[n, m];
@@ -297,7 +412,7 @@ namespace LibraryFor2DArray
          return outputArray;
       }
 
-      public static double[,] InputArray(double[,] inputArray, int n, int m, string nameArray)
+      public static double[,] InputArrayDouble(int[,] inputArray, int n, int m, string nameArray)
       {
          Console.WriteLine("Двумерный массив вещественных чисел {0}:", nameArray);
          double[,] outputArray = new double[n, m];
@@ -317,7 +432,43 @@ namespace LibraryFor2DArray
          return outputArray;
       }
 
-      public static double[] FindMax(double[,] inputArray)
+      public static int[,] InputArrayInt(int[,] inputArray, int n, int m)
+      {
+         Console.WriteLine("Двумерный целочисленный массив:");
+         int[,] outputArray = new int[n, m];
+         for (int i = 0; i < n; i++)
+         {
+            for (int j = 0; j < m; j++)
+            {
+               outputArray[i, j] = inputArray[i, j];
+               Console.Write("{0} ", outputArray[i, j]);
+            }
+
+            Console.WriteLine();
+         }
+
+         return outputArray;
+      }
+
+      public static int[,] InputArrayInt(int[,] inputArray, int n, int m, string nameArray)
+      {
+         Console.WriteLine("Двумерный целочисленный массив {0}:", nameArray);
+         int[,] outputArray = new int[n, m];
+         for (int i = 0; i < n; i++)
+         {
+            for (int j = 0; j < m; j++)
+            {
+               outputArray[i, j] = inputArray[i, j];
+               Console.Write("{0} ", outputArray[i, j]);
+            }
+
+            Console.WriteLine();
+         }
+
+         return outputArray;
+      }
+
+      public static double[] FindMaxDouble(double[,] inputArray)
       {
          // Поиск максимального элемента строки (без флагов bool)
          double[] arrayMax = new double[inputArray.GetLength(0)];
@@ -355,7 +506,45 @@ namespace LibraryFor2DArray
          return arrayMax;
       }
 
-      public static bool SearchingPositiv(double[,] search)
+      public static int[] FindMaxInt(int[,] inputArray)
+      {
+         // Поиск максимального элемента строки (без флагов bool)
+         int[] arrayMax = new int[inputArray.GetLength(0)];
+         int rowOut = 0;
+         int columnOut = 0;
+         while (rowOut < inputArray.GetLength(0))
+         {
+            // Cчитаем, что максимум - это первый элемент строки
+            int maxOut = inputArray[rowOut, 0];
+            while (columnOut < inputArray.GetLength(1))
+            {
+               if (maxOut < inputArray[rowOut, columnOut])
+               {
+                  maxOut = inputArray[rowOut, columnOut];
+               }
+
+               columnOut++;
+            }
+
+            arrayMax[rowOut] = maxOut;
+            //Console.WriteLine("Максимум в строке {0} равен: {1}", rowOut, maxOut);
+            columnOut = 0;
+            rowOut++;
+         }
+
+         Console.WriteLine("Массив максимальных значений строк");
+         int indexMax = 0;
+         while (indexMax < arrayMax.Length)
+         {
+            Console.Write("{0} ", arrayMax[indexMax]);
+            indexMax++;
+         }
+
+         Console.WriteLine();
+         return arrayMax;
+      }
+
+      public static bool SearchingPositivDouble(double[,] search)
       {
          bool fl = true;
          int i = 0;
@@ -380,7 +569,32 @@ namespace LibraryFor2DArray
          return fl;
       }
 
-      public static double SearchingMinPositiv(double[,] search, string nameArray)
+      public static bool SearchingPositivInt(int[,] search)
+      {
+         bool fl = true;
+         int i = 0;
+         while (i < search.GetLength(0) && fl)
+         {
+            int j = 0;
+            while (j < search.GetLength(1) && fl)
+            {
+               if (search[i, j] > 0)
+               {
+                  fl = false;
+               }
+               else
+               {
+                  j++;
+               }
+            }
+
+            i++;
+         }
+
+         return fl;
+      }
+
+      public static double SearchingMinPositivDouble(double[,] search, string nameArray)
       {
          double min = search[0, 0];
          int i = 0;
@@ -411,12 +625,87 @@ namespace LibraryFor2DArray
          return min;
       }
 
-      public static double CalculatingValue(double minOne, double minTwo, double minThree)
+      public static int SearchingMinPositivInt(int[,] search, string nameArray)
+      {
+         int min = search[0, 0];
+         int i = 0;
+         while (i < search.GetLength(0))
+         {
+            int j = 0;
+            while (j < search.GetLength(1))
+            {
+               if (min < 0 && search[i, j] > min)
+               {
+                  min = search[i, j];
+               }
+
+               if (search[i, j] > 0 && search[i, j] < min)
+               {
+                  min = search[i, j];
+               }
+
+               j++;
+            }
+
+            i++;
+         }
+
+         Console.WriteLine("Минимальное значение среди положительных элементов двумерного массива {0}: {1}", nameArray, min);
+         return min;
+      }
+
+      public static double CalculatingValueDouble(double minOne, double minTwo, double minThree)
       {
          return minOne * minTwo - minThree;
       }
 
-      public static string[] VivodString(double input)
+      public static int CalculatingValueInt(int minOne, int minTwo, int minThree)
+      {
+         return minOne * minTwo - minThree;
+      }
+
+      public static void SplittingLines(int[,] input, int multiple, string nameFile)
+      {
+         int[] lines = new int[input.GetLength(1)];
+         int i = 0;
+         while (i < input.GetLength(0))
+         {
+            int j = 0;
+            while (j < input.GetLength(1))
+            {
+               lines[j] = input[i, j];
+               j++;
+            }
+
+            if (SearchingMultiple(lines, multiple))
+            {
+               string line = "В массиве найдена строка " + (i + 1) + " с элементом, кратным " + multiple;
+               Console.WriteLine(line);
+               FileAppendStringArray(line, nameFile);
+            }
+
+            Array.Clear(lines, 0, lines.Length);
+            i++;
+         }
+      }
+
+      public static bool SearchingMultiple(int[] lines, int multiple)
+      {
+         int i = 0;
+         while (i < lines.Length)
+         {
+            if (lines[i] % multiple == 0)
+            {
+               return true;
+            }
+
+            i++;
+         }
+
+         return false;
+      }
+
+      public static string[] OutputStringDouble(double input)
       {
          // Конвертация double в одномерный массив строк string[] для записи в файл (в одну строку массива)
          Console.WriteLine("Одномерный массив строк");
@@ -428,9 +717,21 @@ namespace LibraryFor2DArray
          return stringArray;
       }
 
-      public static string[] VivodStringArray(double[] inputArray)
+      public static string[] OutputStringInt(int input)
       {
-         // Объединение одномерного массива максимальных значений строк double[]
+         // Конвертация int в одномерный массив строк string[] для записи в файл (в одну строку массива)
+         Console.WriteLine("Одномерный массив строк");
+         StringBuilder stringModified = new StringBuilder();
+         stringModified.Append(input);
+         string line = stringModified.ToString();
+         Console.WriteLine(line);
+         string[] stringArray = { line };
+         return stringArray;
+      }
+
+      public static string[] OutputStringDouble(double[] inputArray)
+      {
+         // Объединение одномерного массива double[]
          // в одномерный массив строк string[] для записи в файл (в одну строку массива)
          Console.WriteLine("Одномерный массив строк");
          StringBuilder stringModified = new StringBuilder();
@@ -454,9 +755,35 @@ namespace LibraryFor2DArray
          return stringArray;
       }
 
-      public static string[] VivodArrayString(double[] inputArray)
+      public static string[] OutputStringInt(int[] inputArray)
       {
-         // Объединение одномерного массива максимальных значений строк double[]
+         // Объединение одномерного массива int[]
+         // в одномерный массив строк string[] для записи в файл (в одну строку массива)
+         Console.WriteLine("Одномерный массив строк");
+         StringBuilder stringModified = new StringBuilder();
+         int row = 0;
+         while (row < inputArray.Length)
+         {
+            if (row != inputArray.Length - 1)
+            {
+               stringModified.Append(inputArray[row] + " ");
+            }
+            else
+            {
+               stringModified.Append(inputArray[row]);
+            }
+
+            row++;
+         }
+
+         Console.WriteLine(stringModified);
+         string[] stringArray = { stringModified.ToString() };
+         return stringArray;
+      }
+
+      public static string[] OutputArrayString(double[] inputArray)
+      {
+         // Объединение одномерного массива double[]
          // в одномерный массив строк string[] для записи в файл
          Console.WriteLine("Одномерный массив строк");
          StringBuilder stringModified = new StringBuilder();
@@ -475,28 +802,21 @@ namespace LibraryFor2DArray
          return arrayString;
       }
 
-      public static void FileWriteString(string[] stringArray)
-      {
-         // Запись массива строк в файл
-         Console.WriteLine("Запись массива строк в файл");
-         string filePath = AppContext.BaseDirectory + "b.txt";
-         File.WriteAllLines(filePath, stringArray);
-      }
-
-      public static void FileWriteString(string[] stringArray, string nameFile)
+      public static void FileWriteArrayString(string[] arrayString, string nameFile)
       {
          // Запись массива строк в файл
          Console.WriteLine("Запись массива строк в файл {0}", nameFile);
          string filePath = AppContext.BaseDirectory + nameFile;
-         File.WriteAllLines(filePath, stringArray);
+         File.WriteAllLines(filePath, arrayString);
       }
 
-      public static void FileWriteArray(string[] arrayString)
+      public static void FileAppendStringArray(string line, string nameFile)
       {
-         // Запись массива строк в файл
-         Console.WriteLine("Запись массива строк в файл");
-         string filePath = AppContext.BaseDirectory + "c.txt";
-         File.WriteAllLines(filePath, arrayString);
+         // Создание одномерного массива строк string[] для записи в файл строки
+         string[] stringArray = { line };
+         // Добавление массива строк в файл
+         string filePath = AppContext.BaseDirectory + nameFile;
+         File.AppendAllLines(filePath, stringArray);
       }
    }
 }
