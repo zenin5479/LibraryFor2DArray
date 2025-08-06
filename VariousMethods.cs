@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LibraryFor2DArray
 {
-   public class VariousMethods
+   public class MethodsFor2DArray
    {
       public static int SizeRow()
       {
